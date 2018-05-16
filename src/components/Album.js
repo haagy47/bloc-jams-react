@@ -45,6 +45,11 @@ class Album extends Component {
     }
   }
 
+  handleSongHover() {
+    console.log('hi')
+  }
+
+
   render() {
     return (
       <section className="album">
@@ -66,9 +71,9 @@ class Album extends Component {
               {
                 this.state.album.songs.map( (song, index, album) =>
                   <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-                    <td>{index + 1}</td>
-                    <td>{song.title}</td>
-                    <td>{song.duration}</td>
+                    <td id="song-number" onMouseEnter={this.handleSongHover()}>{index + 1}</td>
+                    <td className="song-title">{song.title}</td>
+                    <td className="song-duration">{song.duration}</td>
                   </tr>
                 )
               }
