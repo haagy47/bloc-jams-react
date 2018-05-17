@@ -49,8 +49,8 @@ class Album extends Component {
     document.getElementById('song-number').innerHTML = "Hi"
   }
 
-  showNumber(event) {
-    document.getElementById('song-number').innerHTML = "Bye"
+  showNumber(index) {
+    document.getElementById('song-number').innerHTML = index + 1
   }
 
 
@@ -75,7 +75,7 @@ class Album extends Component {
               {
                 this.state.album.songs.map( (song, index, album) =>
                   <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-                    <td id="song-number" onMouseEnter={this.showPlay} >{index + 1}</td>
+                    <td id="song-number" onMouseEnter={this.showPlay} onMouseLeave={this.showNumber}>{index + 1}</td>
                     <td>{song.title}</td>
                     <td>{song.duration}</td>
                   </tr>
