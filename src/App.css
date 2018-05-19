@@ -27,10 +27,10 @@
   to { transform: rotate(360deg); }
 }
 
-/* Styles for Album Component */
+/* Styles for Album Component
 .song-number:hover {
   display: none;
 }
 .ion-song-play:hover {
   display: inline;
-}
+}*/

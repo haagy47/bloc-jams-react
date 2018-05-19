@@ -12,6 +12,8 @@ class Album extends Component {
     this.state = {
       album: album,
       currentSong: album.songs[0],
+      isPlaying: false,
+      songHover: false
     };
 
     this.audioElement = document.createElement('audio');
@@ -45,14 +47,13 @@ class Album extends Component {
     }
   }
 
-  showPlay() {
-      document.getElementById('song-number').innerHTML = "Hi"
+  handleIconClass() {
+    if (this.state.isPlaying === true) {
+      return "icon ion-md-play"
+    } else {
+      return "icon ion-md-pause"
+    }
   }
-
-  showNumber(index) {
-    document.getElementById('song-number').innerHTML = index + 1
-  }
-
 
   render() {
     return (
@@ -74,9 +75,12 @@ class Album extends Component {
             <tbody>
               {
                 this.state.album.songs.map( (song, index, album) =>
-                  <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={ () => this.showPlay() } onMouseLeave={ () => this.showNumber(index) } >
-                    <td id="song-number">{index + 1}</td>
-                    <td>{song.title}</td>
+                  <tr className="song" key={index} onClick={() => this.handleSongClick(song)}>
+                    <td className="song-number">
+                      <i className={this.handleIconClass()}></i>
+                      {index+1}
+                    </td>
+                    <td className="song-title">{song.title}</td>
                     <td>{song.duration}</td>
                   </tr>
                 )
