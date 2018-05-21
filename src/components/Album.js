@@ -13,7 +13,7 @@ class Album extends Component {
       album: album,
       currentSong: album.songs[0],
       isPlaying: false,
-      songHover: false
+      songSelected: false
     };
 
     this.audioElement = document.createElement('audio');
@@ -35,6 +35,10 @@ class Album extends Component {
     this.setState({ currentSong: song });
   }
 
+  selectSong(song) {
+    this.setState({ songSelected: true });
+  }
+
   handleSongClick(song) {
     const isSameSong = this.state.currentSong === song;
     if (this.state.isPlaying && isSameSong) {
@@ -47,11 +51,40 @@ class Album extends Component {
     }
   }
 
-  handleIconClass() {
-    if (this.state.isPlaying === true) {
-      return "icon ion-md-play"
+  handleIconClass(e, song){
+    const isSameSong = this.state.currentSong === song;
+    if (this.state.isPlaying && isSameSong){
+      e.target.className = "ion-md-play"
     } else {
-      return "icon ion-md-pause"
+      e.target.className= "ion-md-pause"
+    }
+  }
+
+  handleIconChange(index, song) {
+    const isSameSong = this.state.currentSong === song;
+    if (this.state.isPlaying && isSameSong){
+      return ''
+    } else {
+      return index + 1
+    }
+  }
+
+  handleHoverEnter(e, song) {
+    const isSameSong = this.state.currentSong === song;
+    console.log(this.state.isPlaying)
+    console.log(isSameSong)
+    if (this.state.isPlaying && isSameSong) {
+      e.target.className= "ion-md-pause"
+    } else {
+      e.target.className = "ion-md-play"
+    }
+  }
+
+  handleHoverLeave(e) {
+    if (this.state.isPlaying) {
+      e.target.className= "ion-md-pause"
+    } else {
+      e.target.className = ''
     }
   }
 
@@ -75,10 +108,9 @@ class Album extends Component {
             <tbody>
               {
                 this.state.album.songs.map( (song, index, album) =>
-                  <tr className="song" key={index} onClick={() => this.handleSongClick(song)}>
-                    <td className="song-number">
-                      <i className={this.handleIconClass()}></i>
-                      {index+1}
+                  <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
+                    <td onClick={(e) => this.handleIconClass(e, song)} onMouseEnter={(e) => this.handleHoverEnter(e, song)} onMouseLeave={(e) => this.handleHoverLeave(e, index)}>
+                    {this.handleIconChange(index, song)}
                     </td>
                     <td className="song-title">{song.title}</td>
                     <td>{song.duration}</td>
