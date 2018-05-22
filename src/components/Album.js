@@ -69,19 +69,13 @@ class Album extends Component {
     }
   }
 
-  handleHoverEnter(e, song) {
-    const isSameSong = this.state.currentSong === song;
-    console.log(this.state.isPlaying)
-    console.log(isSameSong)
-    if (this.state.isPlaying && isSameSong) {
-      e.target.className= "ion-md-pause"
-    } else {
+  handleHoverEnter(e) {
       e.target.className = "ion-md-play"
-    }
   }
 
-  handleHoverLeave(e) {
-    if (this.state.isPlaying) {
+  handleHoverLeave(e, song) {
+    const isSameSong = this.state.currentSong === song;
+    if (this.state.isPlaying && isSameSong) {
       e.target.className= "ion-md-pause"
     } else {
       e.target.className = ''
@@ -109,7 +103,7 @@ class Album extends Component {
               {
                 this.state.album.songs.map( (song, index, album) =>
                   <tr className="song" key={index} onClick={() => this.handleSongClick(song)} >
-                    <td onClick={(e) => this.handleIconClass(e, song)} onMouseEnter={(e) => this.handleHoverEnter(e, song)} onMouseLeave={(e) => this.handleHoverLeave(e, index)}>
+                    <td onClick={(e) => this.handleIconClass(e, song)} onMouseEnter={(e) => this.handleHoverEnter(e, song)} onMouseLeave={(e) => this.handleHoverLeave(e, song)}>
                     {this.handleIconChange(index, song)}
                     </td>
                     <td className="song-title">{song.title}</td>
