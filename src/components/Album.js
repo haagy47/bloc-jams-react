@@ -69,8 +69,13 @@ class Album extends Component {
     }
   }
 
-  handleHoverEnter(e) {
+  handleHoverEnter(e, song) {
+    const isSameSong = this.state.currentSong === song;
+    if (this.state.isPlaying && isSameSong){
+      e.target.className = "ion-md-pause"
+    } else {
       e.target.className = "ion-md-play"
+    }
   }
 
   handleHoverLeave(e, song) {
