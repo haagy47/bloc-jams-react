@@ -13,7 +13,6 @@ class Album extends Component {
       album: album,
       currentSong: album.songs[0],
       isPlaying: false,
-      statusPlay: album.songs[0],
       isHovered: false,
       songHovered: album.songs[0]
     };
@@ -53,95 +52,27 @@ class Album extends Component {
         this.setSong(song);
       }
       this.play();
-      this.setState({ statusPlay: song })
     }
   }
 
-  handleIconClass(e, song){
-    const isSameSong = this.state.currentSong === song;
-    if (this.state.isPlaying && isSameSong){
-      //e.target.className = "ion-md-play"
-    } else {
-      //e.target.className= "ion-md-pause"
-    }
-  }
 
-  handleIconChange(index, song) {
-    const isSameSong = this.state.currentSong === song;
-    if (this.state.isPlaying && isSameSong){
-      //return ''
-    } else {
-      //return index + 1
-    }
-  }
-
-  handleHoverEnter(e, song) {
-
-    //const isSameSong = this.state.currentSong === song;
-    //if (this.state.isPlaying && isSameSong){
-        //return (
-          //<div className = "ion-md-play"></div>
-        //)
-    //}
-  }
-
-  handleHoverLeave(e, song) {
-    const isSameSong = this.state.currentSong === song;
-    if (this.state.isPlaying && isSameSong) {
-      //e.target.className= ""
-    } else {
-      //e.target.className = ''
-    }
-  }
-
-  showPause(song, index) {
+  /*showPause(song, index) {
     const isSameSong = this.state.currentSong === song;
     if (this.state.isPlaying && isSameSong){
         return(
           <div className = "ion-md-pause"></div>
       )
     }
-  }
+  }*/
 
-  showPlay(song, index) {
+  /*showPlay(song, index) {
     const isSameSong = this.state.currentSong === song;
     if (!this.state.isPlaying && isSameSong){
         return (
           <div className = "ion-md-play"></div>
         )
-    } else {
-        //return (
-          //<div className = "song-number">{index + 1}</div>
-      //)
     }
-  }
-
-  showSongNumber(song, index) {
-    const isSameSong = this.state.currentSong === song;
-    if (!this.state.isPlaying && !isSameSong){
-        return(
-          <div className = "song-number">{index + 1}</div>
-      )
-    }
-  }
-
-  showSongNumberTwo(song, index) {
-    const isSameSong = this.state.statusPlay === song;
-    if (this.state.isPlaying && !isSameSong){
-        return(
-          <div className = "song-number">{index + 1}</div>
-      )
-    }
-  }
-
-
-  //songHover(song) {
-  //  if (this.state.isHovered) {
-    //  return (
-      //  <div className = "ion-md-play"></div>
-  //  )
-  //  }
-  //}
+  }*/
 
 
   handleHoverOn(song){
@@ -151,13 +82,40 @@ class Album extends Component {
     this.setState({
         songHovered: song
     });
+    console.log(this.state.isHovered)
   }
 
   handleHoverOff(){
     this.setState({
         isHovered: true
     });
+    console.log(this.state.isHovered)
   }
+
+  songHover(song, index) {
+    const isSameSong = this.state.currentSong === song;
+    if (!this.state.isHovered && this.state.songHovered === song && !isSameSong) {
+      return (
+        [
+        <div className = "ion-md-play"></div>,
+        ]
+      )
+    } else if (!this.state.isPlaying && isSameSong) {
+        return (
+          <div className = "ion-md-play"></div>
+        )
+    } else if (this.state.isPlaying && isSameSong){
+        return(
+          <div className = "ion-md-pause"></div>
+      )
+    }
+    else {
+      return (
+        <div className = "song-number">{index + 1}</div>
+      )
+    }
+  }
+
 
   render() {
     return (
@@ -179,13 +137,9 @@ class Album extends Component {
             <tbody>
               {
                 this.state.album.songs.map( (song, index, album) =>
-                  <tr className="song" key={index} onClick={() => this.handleSongClick(song)}>
-                    <td onMouseEnter={() => this.handleHoverOn(song)} onMouseLeave={this.handleHoverOff}>
-                      {/*this.songHover(song, index)*/}
-                      {this.showPause(song, index)}
-                      {this.showPlay(song, index)}
-                      {this.showSongNumber(song, index)}
-                      {this.showSongNumberTwo(song, index)}
+                  <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.handleHoverOn(song)} onMouseLeave={this.handleHoverOff}>
+                    <td>
+                      {this.songHover(song, index)}
                     </td>
                     <td className="song-title">{song.title}</td>
                     <td>{song.duration}</td>
