@@ -15,7 +15,7 @@ class Album extends Component {
       currentSong: album.songs[0],
       isPlaying: false,
       isHovered: false,
-      songHovered: album.songs[0]
+      songHovered: album.songs[0],
     };
 
     this.handleHoverOn = this.handleHoverOn.bind(this);
@@ -64,6 +64,16 @@ class Album extends Component {
     this.play();
   }
 
+  handleNextClick(song) {
+    this.setState({ songHovered: song });
+    const currentIndex = this.state.album.songs.findIndex(song => this.state.currentSong === song);
+    const albumEnd = this.state.album.songs.length - 1;
+    const newIndex = Math.min(albumEnd, currentIndex + 1);
+    const newSong = this.state.album.songs[newIndex];
+    this.setSong(newSong);
+    this.play();
+  }
+
   handleHoverOn(song){
     this.setState({
         isHovered: false
@@ -71,35 +81,33 @@ class Album extends Component {
     this.setState({
         songHovered: song
     });
-    console.log(this.state.isHovered)
   }
 
   handleHoverOff(){
     this.setState({
         isHovered: true
     });
-    console.log(this.state.isHovered)
   }
 
-  songHover(song, index) {
+  songHover(song, index, album) {
+    const firstSong = index[0];
     const isSameSong = this.state.currentSong === song;
     if (!this.state.isHovered && this.state.songHovered === song && !isSameSong) {
       return (
         <div className = "ion-md-play"></div>
       )
     } else if (!this.state.isPlaying && isSameSong) {
-        return (
-          <div className = "ion-md-play"></div>
-        )
-    } else if (this.state.isPlaying && isSameSong){
-        return(
-          <div className = "ion-md-pause"></div>
-      )
-    }
-    else {
       return (
-        <div className = "song-number">{index + 1}</div>
+        <div className = "ion-md-play"></div>
       )
+    } else if (this.state.isPlaying && isSameSong){
+      return(
+        <div className = "ion-md-pause"></div>
+      )
+    } else {
+        return (
+          <div className = "song-number">{index + 1}</div>
+        )
     }
   }
 
@@ -126,7 +134,7 @@ class Album extends Component {
                 this.state.album.songs.map( (song, index, album) =>
                   <tr className="song" key={index} onClick={() => this.handleSongClick(song)} onMouseEnter={() => this.handleHoverOn(song)} onMouseLeave={this.handleHoverOff}>
                     <td>
-                      {this.songHover(song, index)}
+                      {this.songHover(song, index, album)}
                     </td>
                     <td className="song-title">{song.title}</td>
                     <td>{song.duration}</td>
@@ -140,6 +148,7 @@ class Album extends Component {
           currentSong={this.state.currentSong}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={() => this.handlePrevClick()}
+          handleNextClick={() => this.handleNextClick(this.state.album.songs.song)}
           />
        </section>
     );
