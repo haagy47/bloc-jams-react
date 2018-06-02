@@ -152,19 +152,14 @@ class Album extends Component {
     this.audioElement.volume = this.state.currentVolume;
   }
 
-  //Accept a time in seconds as a parameter
-  //Convert seconds to a string with the format M:SS
-
   formatTime(timeSeconds) {
-    const toMinutes = timeSeconds / 60;
-    const minString = toMinutes.toString().slice(0, 4);
-    const minArray = minString.split('.');
-    const minutes = minArray[0];
-    const seconds = minArray[1];
-    console.log(minArray)
-    console.log(minutes);
-    console.log(seconds)
-    return minutes + ":" + seconds;
+    const minutes = Math.floor(timeSeconds / 60);
+    const seconds = Math.floor(timeSeconds - minutes * 60);
+    if (isNaN(timeSeconds)) {
+      return "-:--";
+    } else {
+      return minutes + ":" + seconds;
+    }
   }
 
   render() {
@@ -201,12 +196,10 @@ class Album extends Component {
          <PlayerBar
           isPlaying={this.state.isPlaying}
           currentSong={this.state.currentSong}
-          currentTime={this.formatTime(this.audioElement.currentTime)}
-          //currentTime={this.audioElement.currentTime}
-          duration={this.formatTime(this.audioElement.duration)}
-          //duration={this.audioElement.duration}
+          currentTime={this.audioElement.currentTime}
+          duration={this.audioElement.duration}
           currentVolume={this.state.currentVolume}
-          formatTime={() => this.formatTime(this.state.currentSong)}
+          formatTime={(t) => this.formatTime(t)}
           handleSongClick={() => this.handleSongClick(this.state.currentSong)}
           handlePrevClick={() => this.handlePrevClick()}
           handleNextClick={() => this.handleNextClick(this.state.album.songs.song)}
