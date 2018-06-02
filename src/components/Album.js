@@ -158,7 +158,7 @@ class Album extends Component {
     if (isNaN(timeSeconds)) {
       return "-:--";
     } else {
-      return minutes + ":" + seconds;
+      return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
     }
   }
 
