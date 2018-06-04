@@ -1,28 +1,25 @@
-.App {
+/* Navigation */
+
+/* Header */
+
+.album {
   text-align: center;
+  background: #ededed;
+  color: #333;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+#album-cover-art {
+  border-radius: 50%;
+  height: 300px;
+  padding-top: 15px;
+  padding-bottom: 15px
+  ;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
+/* Body */
 
-.App-title {
-  font-size: 1.5em;
-}
+/* Song List*/
 
-.App-intro {
-  font-size: large;
-}
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
+
+/* Player Bar */
