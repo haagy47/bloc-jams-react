@@ -149,7 +149,7 @@ class Album extends Component {
     const newVolume = e.target.value;
     this.audioElement.currentVolume = newVolume;
     this.setState({ currentVolume: newVolume });
-    this.audioElement.volume = this.state.currentVolume;
+    this.audioElement.volume = newVolume;
   }
 
   formatTime(timeSeconds) {
@@ -158,7 +158,7 @@ class Album extends Component {
     if (isNaN(timeSeconds)) {
       return "-:--";
     } else {
-      return minutes + ":" + seconds;
+      return minutes + ":" + (seconds < 10 ? "0" + seconds : seconds);
     }
   }
 
