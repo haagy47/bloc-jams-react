@@ -11,10 +11,10 @@ class App extends Component {
       <div className="App">
         <header>
           <nav>
-            <Link to='/'>Landing</Link>
-            <Link to='/library'>Library</Link>
+            <Link to='/' className="nav-icon ion-md-home"> Home</Link>
+            <Link to='/library' className="nav-icon ion-md-musical-note"> Library</Link>
           </nav>
-          <h1>Bloc Jams</h1>
+          <h1 className="site-title">Bloc Jams</h1>
         </header>
         <main>
           <Route exact path="/" component={Landing} />

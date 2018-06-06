@@ -1,25 +1,147 @@
-/* Navigation */
+/* Global */
+
+body {
+  background: #ededed;
+}
+
+nav {
+  background: #d3d3d3;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+nav > a {
+  padding: 10px;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Contrail One', cursive;
+  color: #3d3e50;
+}
+
+h2 {
+  font-size: 48px;
+}
+
+p {
+  color: #97a6ac;
+}
+
+a {
+  color: #3d3e50;
+}
+
+/* Head */
+
+.site-title {
+  padding: 20px;
+  margin-bottom: 0px;
+  text-align: center;
+  font-size: 38px;
+}
+
+/* Landing */
+
+.landing {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.landing-img {
+  width: 400px;
+  padding-bottom: 30px;
+}
+
+/* Library */
+
+.library {
+  text-align: center;
+}
+
+.library img {
+
+  width: 80%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+
+/* Album */
 
 /* Header */
 
 .album {
   text-align: center;
-  background: #ededed;
   color: #333;
 }
 
 #album-cover-art {
-  border-radius: 50%;
   height: 300px;
   padding-top: 15px;
-  padding-bottom: 15px
-  ;
+  padding-bottom: 15px;
 }
-
-/* Body */
 
 /* Song List*/
 
+.song-list-container {
+  text-align: center;
+  padding-top: 60px;
+  padding-bottom: 20px;
+}
 
+#song-list {
+    border-collapse: collapse;
+}
+
+.song {
+    border-bottom: 1px solid #fff;
+}
+
+.song:hover {
+  background: #d3d3d3;
+}
 
 /* Player Bar */
+
+.player-bar {
+  text-align: center;
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+#buttons > button {
+  background: white;
+  text-align: center;
+  border: .5px solid #ededed;
+}
+
+#buttons > button:hover {
+  background: #a0a7de;
+}
+
+#previous {
+  width: 15%;
+}
+
+#play-pause {
+  width: 15%;
+}
+
+#next {
+  width: 15%;
+}
+
+.current-time, .total-time, #time-control > input, .low-volume, .high-volume, #volume-control > input {
+  width: 33.33%;
+  display: inline;
+}
+
+.current-time, .total-time, .low-volume, .high-volume {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#volume-control, #time-control {
+  padding-top: 20px;
+}

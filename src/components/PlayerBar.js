@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class PlayerBar extends Component {
   render() {
     return (
-      <section className="player-bar">
+      <section className="player-bar col-md-12">
         <section id="buttons">
            <button id="previous" onClick={this.props.handlePrevClick}>
              <span className="ion-md-skip-backward"></span>
@@ -29,7 +29,7 @@ class PlayerBar extends Component {
           <div className="total-time">{this.props.formatTime(this.props.duration)}</div>
        </section>
        <section id="volume-control">
-         <div className="icon ion-md-volume-low"></div>
+         <div className="icon ion-md-volume-low low-volume"></div>
          <input
             type="range"
             className="seek-bar"
@@ -39,7 +39,7 @@ class PlayerBar extends Component {
             step="0.01"
             onChange={this.props.handleVolumeChange}
         />
-         <div className="icon ion-md-volume-high"></div>
+         <div className="icon ion-md-volume-high high-volume"></div>
        </section>
       </section>
     );
